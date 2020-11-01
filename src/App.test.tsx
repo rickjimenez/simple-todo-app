@@ -1,7 +1,9 @@
 import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import App, { Todo, NewTodo } from './App';
+import App from './App';
+import NewTodo from './components/NewTodo';
+import Todo from './components/Todo';
 import useTodos from './hooks/useTodos';
 
 configure({ adapter: new Adapter() });
@@ -61,13 +63,13 @@ describe('Unit Tests: <App/>', () => {
     });
   });
 
-  describe('custom hook: useTodos', () => {
+  describe('Custom hook: useTodos', () => {
     const ContainerComp = (props: { hook: () => {} }) => {
       const hook = props.hook();
       return <div {...hook}></div>;
     };
 
-    it('addTodo', () => {
+    it('addTodo should add a new task', () => {
       const wrapper = shallow(<ContainerComp hook={useTodos} />);
       let props = wrapper.find('div').props() as IuseTodos;
       props.addTodo('Test text');
@@ -75,7 +77,7 @@ describe('Unit Tests: <App/>', () => {
       expect(props.todos[0].text).toEqual('Test text');
     });
 
-    it('removeTodo', () => {
+    it('removeTodo should remove a task', () => {
       const wrapper = shallow(<ContainerComp hook={useTodos} />);
       let props = wrapper.find('div').props() as IuseTodos;
       props.removeTodo(1);
@@ -83,7 +85,7 @@ describe('Unit Tests: <App/>', () => {
       expect(props.todos.length).toEqual(2);
     });
 
-    it('completeTodo', () => {
+    it('completeTodo should set the task status to complete', () => {
       const wrapper = shallow(<ContainerComp hook={useTodos} />);
       let props = wrapper.find('div').props() as IuseTodos;
       props.completeTodo(1);
@@ -95,7 +97,7 @@ describe('Unit Tests: <App/>', () => {
 
 // integration test
 describe('Integration Test: <App/>', () => {
-  it('App', () => {
+  test('if add a new task', () => {
     const newTodoText: string = 'my todo';
     const wrapper = mount(<App />);
     const prevent = jest.fn();

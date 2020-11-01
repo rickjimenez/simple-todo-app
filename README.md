@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Unit and integration tests implementation (Jest/Enzyme)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple todo app to playground with jest and enzyme, using unit and integration tests.
+
+Unit testing means testing individual modules of an application in isolation (without any interaction with dependencies) to confirm that the code is doing things right.
+
+Integration testing means checking if different modules are working fine when combined together as a group.
 
 ## Available Scripts
 
